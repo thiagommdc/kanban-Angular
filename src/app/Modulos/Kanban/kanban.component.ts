@@ -4,6 +4,7 @@ import { KanbanApi } from './../../Servicos/KanbanApi';
 import { IUsuarioDTO } from './../../Tipos/DTO/IUsuarioDTO';
 import { Component, OnInit } from '@angular/core';
 import { IEtapasComTarefas } from 'src/app/Tipos/Models/IEtapasComTarefas';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-kanban',
@@ -91,6 +92,45 @@ export class KanbanComponent implements OnInit {
       nome: nome
     }
     this.api.editaEtapa(etapaParaEdicao);
+  }
+
+  drop(event: CdkDragDrop<ITarefaDTO[]>) {
+    console.log(event);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+    this.atualizaTarefaEtapa(event.container.id, event.container.data[event.currentIndex]);
+  }
+
+  atualizaTarefaEtapa(strIdEtapa: string, tarefa: ITarefaDTO) {
+    const temp = strIdEtapa.split("-");
+    const ultimoIndex = temp.length - 1;
+    const IdEtapa = Number(temp[ultimoIndex]) + 1;
+
+    tarefa.etapa = IdEtapa;
+    this.api.editaTarefa(tarefa);
+    if (IdEtapa == 5)
+      this.exibeMsgCompleto(tarefa);
+
+  }
+
+  exibeMsgCompleto(tarefa: ITarefaDTO) {
+    const newLine = "\r\n";
+    let msg = "Assunto: Tarefa completada!";
+    msg += newLine;
+    msg += "Mensagem: A tarefa foi completada";
+    msg += newLine;
+    msg += "Usuário: " + this.usuarios.find(t => t.id == tarefa.usuarioId)?.nome;
+    msg += newLine;
+    msg += "Tarefa: " + tarefa.titulo;
+    msg += newLine;
+    msg += "Descrição: " + tarefa.descricao;
+    alert(msg);
   }
 
 }

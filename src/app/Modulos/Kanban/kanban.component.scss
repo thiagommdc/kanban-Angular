@@ -32,6 +32,10 @@ $cor-faixa: #0080ff;
             padding: 0px 20px 20px 20px;
             border-right: 1px solid $cor-borda;
             width: calc(100% - 40px);
+
+            &__drop{
+                min-height: 500px;
+            }
         }
        
     }

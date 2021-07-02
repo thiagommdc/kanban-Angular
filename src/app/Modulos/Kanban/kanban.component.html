@@ -1,7 +1,59 @@
 <div class="kanban">
     <div class="kanban__tarefas">
 
-        <div class="etapa" *ngFor="let item of iteracaoEtapas; index as i">
+        <div class="etapa" cdkDropList #etapa1="cdkDropList" [cdkDropListData]="iteracaoEtapas[0].tarefas"
+            [cdkDropListConnectedTo]="[etapa2, etapa3, etapa4, etapa5]" (cdkDropListDropped)="drop($event)">
+            <div class="nome">
+                <input type="text" placeholder="Etapa" [value]="iteracaoEtapas[0].nome"
+                    (change)="alteraNomeEtapa(iteracaoEtapas[0].id ,$event.target)" />
+                <button (click)="adicionaTarefa(iteracaoEtapas[0].id)"><i class="fas fa-plus-square"></i></button>
+            </div>
+            <app-card-tarefas *ngFor="let tarefa of iteracaoEtapas[0].tarefas" [tarefa]="tarefa" cdkDrag>
+            </app-card-tarefas>
+        </div>
+
+        <div class="etapa" cdkDropList #etapa2="cdkDropList" [cdkDropListData]="iteracaoEtapas[1].tarefas"
+            [cdkDropListConnectedTo]="[etapa1, etapa3, etapa4, etapa5]" (cdkDropListDropped)="drop($event)">
+            <div class="nome">
+                <input type="text" placeholder="Etapa" [value]="iteracaoEtapas[1].nome"
+                    (change)="alteraNomeEtapa(iteracaoEtapas[1].id ,$event.target)" />
+            </div>
+            <app-card-tarefas *ngFor="let tarefa of iteracaoEtapas[1].tarefas" [tarefa]="tarefa" cdkDrag>
+            </app-card-tarefas>
+        </div>
+
+        <div class="etapa" cdkDropList #etapa3="cdkDropList" [cdkDropListData]="iteracaoEtapas[2].tarefas"
+            [cdkDropListConnectedTo]="[etapa1, etapa2, etapa4, etapa5]" (cdkDropListDropped)="drop($event)">
+            <div class="nome">
+                <input type="text" placeholder="Etapa" [value]="iteracaoEtapas[2].nome"
+                    (change)="alteraNomeEtapa(iteracaoEtapas[2].id ,$event.target)" />
+            </div>
+            <app-card-tarefas *ngFor="let tarefa of iteracaoEtapas[2].tarefas" [tarefa]="tarefa" cdkDrag>
+            </app-card-tarefas>
+        </div>
+
+        <div class="etapa" cdkDropList #etapa4="cdkDropList" [cdkDropListData]="iteracaoEtapas[3].tarefas"
+            [cdkDropListConnectedTo]="[etapa1, etapa2, etapa3, etapa5]" (cdkDropListDropped)="drop($event)">
+            <div class="nome">
+                <input type="text" placeholder="Etapa" [value]="iteracaoEtapas[3].nome"
+                    (change)="alteraNomeEtapa(iteracaoEtapas[3].id ,$event.target)" />
+            </div>
+            <app-card-tarefas *ngFor="let tarefa of iteracaoEtapas[3].tarefas" [tarefa]="tarefa" cdkDrag>
+            </app-card-tarefas>
+        </div>
+        
+        <div class="etapa" cdkDropList #etapa5="cdkDropList" [cdkDropListData]="iteracaoEtapas[4].tarefas"
+            [cdkDropListConnectedTo]="[etapa1, etapa2, etapa3, etapa4]" (cdkDropListDropped)="drop($event)">
+            <div class="nome">
+                <input type="text" placeholder="Etapa" [value]="iteracaoEtapas[4].nome"
+                    (change)="alteraNomeEtapa(iteracaoEtapas[4].id ,$event.target)" />
+            </div>
+            <app-card-tarefas *ngFor="let tarefa of iteracaoEtapas[4].tarefas" [tarefa]="tarefa" cdkDrag>
+            </app-card-tarefas>
+        </div>
+
+
+        <!-- <div class="etapa" *ngFor="let item of iteracaoEtapas; index as i">
 
             <div class="nome">
                 <input type="text" placeholder="Etapa" [value]="item.nome"
@@ -12,7 +64,7 @@
             <app-card-tarefas *ngFor="let tarefa of item.tarefas" [tarefa]="tarefa"></app-card-tarefas>
 
             <div style="height: 100px;"></div>
-        </div>
+        </div> -->
 
     </div>
     <div class="kanban__usuarios">

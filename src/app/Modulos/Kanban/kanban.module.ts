@@ -4,6 +4,7 @@ import { KanbanComponent } from './kanban.component';
 import { FormsModule } from '@angular/forms';
 import { CardUsuariosComponent } from './componentes/card-usuarios/card-usuarios.component';
 import { CardTarefasComponent } from './componentes/card-tarefas/card-tarefas.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { CardTarefasComponent } from './componentes/card-tarefas/card-tarefas.co
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   exports: [
     KanbanComponent
