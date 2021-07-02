@@ -1,0 +1,5 @@
+<div class="usuarios" *ngIf="seAtivo">
+    <i class="fas fa-bars"></i>
+    <input type="text" placeholder="Nome do usuario"  [(ngModel)]="usuario.nome" (change)="atualizaNome()">
+    <i class="fas fa-trash-alt" (click)="excluiUsuario()"></i>
+</div>

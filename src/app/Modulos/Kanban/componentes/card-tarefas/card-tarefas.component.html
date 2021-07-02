@@ -1,0 +1,28 @@
+<div class="tarefas" *ngIf="seExibe">   
+    <div class="data-hora">
+        {{ tarefa.dataCadastro | date:'dd/MM/yy - HH:MM' }}
+    </div>
+        <div class="titulo">
+            <textarea type="text" [(ngModel)]="tarefa.titulo" placeholder="Título da tarefa" (keyup)="resizeTitulo()" (change)="editaTitulo()"
+                #tituloInput></textarea>
+        </div>
+        <div class="subtitulo">
+            <textarea type="text" [(ngModel)]="tarefa.subtitulo" placeholder="Subtitulo da tarefa" (keyup)="resizeSubtitulo()" (change)="editaSubtitulo()"
+                #subtituloInput></textarea>
+        </div>
+        <div class="descricao">
+            <textarea rows='1' [(ngModel)]="tarefa.descricao" placeholder='Descrição da tarefa' (keyup)="resizeDescricao()" (change)="editaDescricao()"
+                #descricaoInput name="descricao"></textarea>
+        </div>
+        <div class="favorito">
+            <button (click)="editaFavorito()">
+                <i class="far fa-heart" *ngIf="!tarefa?.favorito"></i>
+                <i class="fas fa-heart" *ngIf="tarefa?.favorito"></i>
+            </button>
+        </div>
+        <div class="exclusao">
+            <button (click)="excluiTarefa()">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+</div>

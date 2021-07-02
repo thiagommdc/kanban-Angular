@@ -1,0 +1,29 @@
+<div class="kanban">
+    <div class="kanban__tarefas">
+
+        <div class="etapa" *ngFor="let item of iteracaoEtapas; index as i">
+
+            <div class="nome">
+                <input type="text" placeholder="Etapa" [value]="item.nome"
+                    (change)="alteraNomeEtapa(item.id ,$event.target)" />
+                <button *ngIf="i == 0" (click)="adicionaTarefa(item.id)"><i class="fas fa-plus-square"></i></button>
+            </div>
+
+            <app-card-tarefas *ngFor="let tarefa of item.tarefas" [tarefa]="tarefa"></app-card-tarefas>
+
+            <div style="height: 100px;"></div>
+        </div>
+
+    </div>
+    <div class="kanban__usuarios">
+        <div class="nome">
+            <input type="text" value="lista de usuarios" disabled="disabled" />
+            <button (click)="adicionaUsuario()"><i class="fas fa-user-plus"></i></button>
+        </div>
+
+        <a *ngFor="let item of usuarios" (click)="exibeTarefas(item.id)">
+            <app-card-usuarios [usuario]="item"></app-card-usuarios>
+        </a>
+
+    </div>
+</div>
